@@ -1,7 +1,7 @@
 <?php
-$servername = "mysql-service";
-$username = "user";
-$password = "secret";
+$servername = "127.0.0.1";
+$username = "phpmyadmin";
+$password = "password";
 $dbname = "db";
 
 try {
@@ -13,20 +13,20 @@ try {
 
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+        
         // Create table if not exists
-        $sql = "CREATE TABLE IF NOT EXISTS survey_data (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(255) NOT NULL,
-            email VARCHAR(255) NOT NULL,
-            age INT,
-            user_recommend VARCHAR(20),
-            prefer VARCHAR(255),
-            os_prep INT,
-            most_like VARCHAR(255),
-            comment TEXT
-        )";
-        $conn->exec($sql);
+       $sql = "CREATE TABLE IF NOT EXISTS survey_data (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(255) NOT NULL,
+                email VARCHAR(255) NOT NULL,
+                age INT,
+                user_recommend VARCHAR(20),
+                prefer VARCHAR(255),
+                os_prep INT,
+                most_like VARCHAR(255),
+                comment TEXT
+            )";
+            $conn->exec($sql);
 
         // Prepare SQL statement for insertion
         $stmt = $conn->prepare("INSERT INTO survey_data (name, email, age, user_recommend, prefer, os_prep, most_like, comment) 
@@ -54,7 +54,8 @@ try {
 
         $stmt->execute();
 
-        echo "Thank you for submitting the form!";
+        header('Location: thankyou.html');
+        exit;
     } else {
         echo "Invalid request method.";
     }

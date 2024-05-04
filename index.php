@@ -228,10 +228,9 @@
                     <span class="clue">(Check all that apply)</span>
                 </p>
 
-                <label><input name="prefer" value="Advanced_Linux_Administration" type="radio"
+                <label><input name="prefer[]" value="Advanced_Linux_Administration" type="radio"
                         class="input-radio" />Advanced Linux Administration</label>
-                <label>
-                    <input name="prefer[]" value="Linux_Security" type="radio" class="input-radio" />Linux
+                <label><input name="prefer[]" value="Linux_Security" type="radio" class="input-radio" />Linux
                     Security</label>
                 <label><input name="prefer[]" value="Containerization_and_Orchestration" type="radio"
                         class="input-radio" />Containerization and Orchestration</label>
