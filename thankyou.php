@@ -33,8 +33,8 @@
                 <?php
                 // Connexion à la base de données
                 $servername = "127.0.0.1";
-                $username = "root";
-                $password = "";
+                $username = "phpmyadmin";
+                $password = "password";
                 $dbname = "db";
                 $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
