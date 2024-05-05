@@ -1,7 +1,7 @@
 <?php
 $servername = "127.0.0.1";
-$username = "phpmyadmin";
-$password = "password";
+$username = "root";
+$password = "";
 $dbname = "db";
 
 try {
@@ -19,23 +19,21 @@ try {
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 name VARCHAR(255) NOT NULL,
                 email VARCHAR(255) NOT NULL,
-                age INT,
                 user_recommend VARCHAR(20),
                 prefer VARCHAR(255),
-                os_prep INT,
+                os_prep VARCHAR(255),
                 most_like VARCHAR(255),
                 comment TEXT
             )";
             $conn->exec($sql);
 
         // Prepare SQL statement for insertion
-        $stmt = $conn->prepare("INSERT INTO survey_data (name, email, age, user_recommend, prefer, os_prep, most_like, comment) 
-                                VALUES (:name, :email, :age, :user_recommend, :prefer, :os_prep, :most_like, :comment)");
+        $stmt = $conn->prepare("INSERT INTO survey_data (name, email, user_recommend, prefer, os_prep, most_like, comment) 
+                                VALUES (:name, :email, :user_recommend, :prefer, :os_prep, :most_like, :comment)");
 
         // Bind parameters
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':age', $age);
         $stmt->bindParam(':user_recommend', $user_recommend);
         $stmt->bindParam(':prefer', $prefer);
         $stmt->bindParam(':os_prep', $os_prep);
@@ -45,16 +43,15 @@ try {
         // Set parameters and execute
         $name = $_POST['name'];
         $email = $_POST['email'];
-        $age = isset($_POST['age']) ? $_POST['age'] : null;
         $user_recommend = $_POST['user-recommend'];
-        $prefer = isset($_POST['prefer']) ? implode(',', $_POST['prefer']) : null;
+        $prefer = isset($_POST['prefer']) ? $_POST['prefer'] : null;
         $os_prep = $_POST['osPrep'];
         $most_like = $_POST['mostLike'];
         $comment = $_POST['comment'];
 
         $stmt->execute();
 
-        header('Location: thankyou.html');
+        header('Location: thankyou.php');
         exit;
     } else {
         echo "Invalid request method.";
@@ -67,3 +64,5 @@ try {
 
 $conn = null;
 ?>
+
+
